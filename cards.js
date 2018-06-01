@@ -47,33 +47,35 @@ module.exports.isFullHouse = (hand) => {
       'AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', '10S', 'JS', 'QS', 'KS', 
     ];
 
-  if (hand.length === 0 || !Array.isArray(hand)) {
+  if (!Array.isArray(hand) || hand.length !== 5 ) {
     return "Error: not a valid hand";
   } else {
     for (let i = 0; i < hand.length; i++) {
       let cardValue = '';
-
-      if (validCards.indexOf(hand[i]) === -1) {
+      let cardIndex = validCards.indexOf(hand[i]);
+      if (cardIndex === -1) {
         return "Error: not a valid hand";
-      } else {    
+      } else {
         cardValue = hand[i].slice(0, hand[i].length - 1);
+        validCards.splice(cardIndex, 1);
       }
 
-    // if card already exists in count or if count has less than 2 keys, add/increment card count
-    if (count[cardValue] || Object.keys(count).length < 2) {
-      if(count[cardValue]) {
-        count[cardValue]++;
+      // if card already exists in count or if count has less than 2 keys, add/increment card count
+      if (count[cardValue] || Object.keys(count).length < 2) {
+        if(count[cardValue]) {
+          count[cardValue]++;
+        } else {
+          count[cardValue] = 1;
+        }
+        // if i is 4, set fullHouse to true
+        if (i === 4) {
+          return true;
+        }
+      // if there are two items in count already, return false  
       } else {
-        count[cardValue] = 1;
+        return false;
       }
-      // if i is 4, set fullHouse to true
-      if (i === 4) {
-        return true;
-      }
-    // if there are two items in count already, return false  
-    } else {
-      return false;
-    }
-  };
+    };
   }
 }
+

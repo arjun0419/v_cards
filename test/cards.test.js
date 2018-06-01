@@ -39,21 +39,25 @@ describe('Test all cards.js methods ', () => {
   });
 
   describe('isFullHouse:', () => {
-    const fullHouseHand = ['8D', '8C', 'JD', 'JD', '8S'];
-    const notFullHouseHand = ['8D', '8C', 'JD', '2D', '8S'];
-
     it('should return true when hand is a Full House', () => {
-      assert.isTrue(cards.isFullHouse(fullHouseHand), 'is a Full House!');
+      assert.isTrue(cards.isFullHouse(['10D', '10C', 'JD', 'JH', '10S']), 'is a Full House!');
+      assert.isTrue(cards.isFullHouse(['AD', 'AC', 'AH', '3D', '3S']), 'is a Full House!');
     });
     it('should return false when hand is not a Full House', () => {
-      assert.isFalse(cards.isFullHouse(notFullHouseHand), 'is not a Full House!');
+      assert.isFalse(cards.isFullHouse(['8D', '8C', 'JD', '2D', '8S']), 'is not a Full House!');
     });
-    it('should return null when argument is an empty array or not an array', () => {
-      assert.equal(cards.isFullHouse([]), "Error: not a valid hand", 'returns "Error: not a valid hand"');
+    it('should return Error: not a valid hand" when argument is a not an array', () => {
+      assert.equal(cards.isFullHouse(""), "Error: not a valid hand");
     });
-    it("should return 'Error: not a valid hand' when argument contains an incorrect card type", () => {
-      assert.equal(cards.isFullHouse([0]), 'Error: not a valid hand');
-      assert.equal(cards.isFullHouse(['8D', '8C', 'JD', 0, '8S']), 'Error: not a valid hand');
+    it("should return 'Error: not a valid hand' when argument doesn't have 5 cards", () => {
+      assert.equal(cards.isFullHouse(['8D', '8C', 'JD', '2D']), "Error: not a valid hand");
+    });
+    it("should return 'Error: not a valid hand' when hand contains duplicate cards", () => {
+      assert.equal(cards.isFullHouse(['8D', '8D', 'JD', '2C', '2H']), "Error: not a valid hand");
+    });
+    it("should return 'Error: not a valid hand' when argument contains an incorrect card ", () => {
+      assert.equal(cards.isFullHouse(['8D', '8C', 'JD', 0, '8S']), "Error: not a valid hand");
+      assert.equal(cards.isFullHouse(['8D', '8C', 'JD', '11C', '8S']), "Error: not a valid hand");
     });
   });
 });
