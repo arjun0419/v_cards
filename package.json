@@ -1,0 +1,23 @@
+{
+  "name": "v_cards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjun0419/v_cards.git"
+  },
+  "author": "arjun0419",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arjun0419/v_cards/issues"
+  },
+  "homepage": "https://github.com/arjun0419/v_cards#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  }
+}
